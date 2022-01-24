@@ -34,11 +34,10 @@ steps:
     majorVersion: '1'
     minorVersion: '0'
     patchVersion: '0'
- 
+
 - task: NuGetCommand@2
-  displayName: 'Publish NuGet package'
   inputs:
-    command: push
-    feedPublish: '$(System.TeamProject)/spacegamemodels'
-    allowPackageConflicts: true
-  condition: succeeded()
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'efcb1b2c-d94a-4f7f-b98a-f4c8410187ca'
